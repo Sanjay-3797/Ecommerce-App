@@ -3,27 +3,6 @@ import { Col, Image, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const cartElements = [
-  {
-    title: "Colors",
-    price: 100,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%201.png",
-    quantity: 2,
-  },
-  {
-    title: "Black and white Colors",
-    price: 50,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-    quantity: 3,
-  },
-  {
-    title: "Yellow and Black Colors",
-    price: 70,
-    imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-    quantity: 1,
-  },
-];
-
 const CartModal = (props) => {
   return (
     <Fragment>
@@ -34,7 +13,7 @@ const CartModal = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            Cart <sup>{0}</sup>
+            Cart <sup>{props.products.length}</sup>
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -44,8 +23,8 @@ const CartModal = (props) => {
             <Col>QUANTITY</Col>
           </Row>
         </Modal.Body>
-        {cartElements.map((item) => (
-          <Modal.Body>
+        {props.products.map((item) => (
+          <Modal.Body key={item.title}>
             <Row>
               <Col>
                 <Image src={item.imageUrl} alt="" style={{ height: "50px" }} />
@@ -54,13 +33,26 @@ const CartModal = (props) => {
               <Col>
                 <span>$ {item.price}</span>
               </Col>
-              <Col style={{ display: "flex", justifyContent:"space-evenly", height:"40px"}}>
+              <Col
+                style={{
+                  display: "flex",
+                  justifyContent: "space-evenly",
+                  height: "40px",
+                }}
+              >
                 <input
                   type="number"
                   value={item.quantity}
                   style={{ width: "31px" }}
                 />
-                <Button variant="danger">REMOVE</Button>
+                <Button
+                  variant="danger"
+                  onClick={() => {
+                    props.onRemove(item.title);
+                  }}
+                >
+                  REMOVE
+                </Button>
               </Col>
             </Row>
           </Modal.Body>
