@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import AvailableProducts from "./components/AvailableProducts";
 import CartModal from "./components/CartModal";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import About from "./components/About";
+
+const router = createBrowserRouter([{ path: "/about", element: <About /> }]);
 
 const App = () => {
   const [productData, setProductData] = useState([]);
@@ -38,6 +42,7 @@ const App = () => {
       )}
       <NavBar onShowCart={handleShow} products={productData} />
       <AvailableProducts onAddToCart={addToCartHandler} />
+      <RouterProvider router={router} />
     </React.Fragment>
   );
 };

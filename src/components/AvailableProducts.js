@@ -47,7 +47,7 @@ const AvailableProducts = (props) => {
         className="mt-4"
         style={{ display: "flex", justifyContent: "space-evenly" }}
       >
-        <span>₹ {item.price}</span>
+        <span>$ {item.price}</span>
         <Button
           variant="secondary"
           onClick={() => {

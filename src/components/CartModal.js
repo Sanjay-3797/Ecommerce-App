@@ -4,6 +4,11 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
 const CartModal = (props) => {
+  let totalAmout = 0;
+  for (const product of props.products) {
+    totalAmout += product.price;
+  }
+
   return (
     <Fragment>
       <Modal
@@ -57,12 +62,15 @@ const CartModal = (props) => {
             </Row>
           </Modal.Body>
         ))}
+        <span style={{ display: "flex", justifyContent: "end" }}>
+          Total ${totalAmout}
+        </span>
         <Modal.Footer>
           <Button variant="secondary" onClick={props.onHandleClose}>
-            Close
+            Save Changes
           </Button>
           <Button variant="success" onClick={props.onHandleClose}>
-            Save Changes
+            Purchase
           </Button>
         </Modal.Footer>
       </Modal>
