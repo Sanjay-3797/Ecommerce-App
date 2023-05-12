@@ -2,10 +2,9 @@ import React, { useState } from "react";
 import NavBar from "./components/NavBar";
 import AvailableProducts from "./components/AvailableProducts";
 import CartModal from "./components/CartModal";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/About";
-
-const router = createBrowserRouter([{ path: "/about", element: <About /> }]);
+import Home from "./components/Home";
 
 const App = () => {
   const [productData, setProductData] = useState([]);
@@ -16,7 +15,6 @@ const App = () => {
   const addToCartHandler = (productData) => {
     setProductData((prevData) => {
       if (prevData.includes(productData)) {
-        alert("This item is already added to the cart");
         return prevData;
       }
       return [...prevData, productData];
@@ -30,6 +28,21 @@ const App = () => {
     });
   };
 
+  const router = createBrowserRouter([
+    {
+      path: "/",
+      element: <AvailableProducts onAddToCart={addToCartHandler} />,
+    },
+    {
+      path: "/about",
+      element: <About />,
+    },
+    {
+      path: "/home",
+      element: <Home />,
+    },
+  ]);
+
   return (
     <React.Fragment>
       {showCart && (
@@ -41,7 +54,6 @@ const App = () => {
         />
       )}
       <NavBar onShowCart={handleShow} products={productData} />
-      <AvailableProducts onAddToCart={addToCartHandler} />
       <RouterProvider router={router} />
     </React.Fragment>
   );

@@ -14,21 +14,21 @@ const productsArray = [
     head: "Album 2",
     price: 50,
     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%202.png",
-    quantity: 3,
+    quantity: 1,
   },
   {
     title: "Yellow and Black Colors",
     head: "Album 3",
     price: 70,
     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%203.png",
-    quantity: 5,
+    quantity: 1,
   },
   {
     title: "Blue Color",
     head: "Album 4",
     price: 100,
     imageUrl: "https://prasadyash2411.github.io/ecom-website/img/Album%204.png",
-    quantity: 2,
+    quantity: 1,
   },
 ];
 

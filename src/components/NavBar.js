@@ -12,9 +12,9 @@ const NavBar = (props) => {
           <Navbar.Toggle aria-controls="responsive-navbar-nav" />
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
-              <Nav.Link href="#home">HOME</Nav.Link>
-              <Nav.Link href="#store">STORE</Nav.Link>
-              <Nav.Link href="/about" target="_blank">ABOUT</Nav.Link>
+              <Nav.Link href="/home">HOME</Nav.Link>
+              <Nav.Link href="/">STORE</Nav.Link>
+              <Nav.Link href="/about">ABOUT</Nav.Link>
               <Button variant="secondary" onClick={props.onShowCart}>
                 CART <sup>{props.products.length}</sup>
               </Button>

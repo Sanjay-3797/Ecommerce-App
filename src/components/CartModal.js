@@ -69,7 +69,12 @@ const CartModal = (props) => {
           <Button variant="secondary" onClick={props.onHandleClose}>
             Save Changes
           </Button>
-          <Button variant="success" onClick={props.onHandleClose}>
+          <Button
+            variant="success"
+            onClick={() => {
+              props.onHandleClose(alert("Thanks for Shopping"));
+            }}
+          >
             Purchase
           </Button>
         </Modal.Footer>
