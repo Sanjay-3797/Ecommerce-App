@@ -15,6 +15,7 @@ const NavBar = (props) => {
               <Nav.Link href="/home">HOME</Nav.Link>
               <Nav.Link href="/">STORE</Nav.Link>
               <Nav.Link href="/about">ABOUT</Nav.Link>
+              <Nav.Link href="/contactUs">Contact Us</Nav.Link>
               <Button variant="secondary" onClick={props.onShowCart}>
                 CART <sup>{props.products.length}</sup>
               </Button>

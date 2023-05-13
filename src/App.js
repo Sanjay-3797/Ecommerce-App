@@ -5,6 +5,7 @@ import CartModal from "./components/CartModal";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import About from "./components/About";
 import Home from "./components/Home";
+import ContactUs from "./components/ContactUs";
 
 const App = () => {
   const [productData, setProductData] = useState([]);
@@ -15,6 +16,7 @@ const App = () => {
   const addToCartHandler = (productData) => {
     setProductData((prevData) => {
       if (prevData.includes(productData)) {
+        alert("This item is already added to Cart");
         return prevData;
       }
       return [...prevData, productData];
@@ -40,6 +42,10 @@ const App = () => {
     {
       path: "/home",
       element: <Home />,
+    },
+    {
+      path: "/contactUs",
+      element: <ContactUs />,
     },
   ]);
 
