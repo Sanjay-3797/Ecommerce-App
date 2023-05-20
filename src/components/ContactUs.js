@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import Card from "./UI/Card";
 
-const ContactUs = (props) => {
+const ContactUs = () => {
   const [userName, setUserName] = useState("");
   const [userEmail, setUserEmail] = useState("");
   const [userPhone, setUserPhone] = useState("");
@@ -44,7 +44,7 @@ const ContactUs = (props) => {
       }
 
       const data = await response.json();
-      console.log(data);
+      console.log(data.name);
     } catch (error) {
       console.log(error);
     }
