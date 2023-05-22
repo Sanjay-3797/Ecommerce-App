@@ -24,6 +24,7 @@ const Login = (props) => {
     const enteredEmail = enteredEmailRef.current.value;
     const enteredPassword = enteredPasswordRef.current.value;
 
+    props.email(enteredEmail);
     setIsLoading(true);
     let url;
     if (isLogin) {

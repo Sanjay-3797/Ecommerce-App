@@ -6,7 +6,7 @@ import Modal from "react-bootstrap/Modal";
 const CartModal = (props) => {
   let totalAmout = 0;
   for (const product of props.products) {
-    totalAmout += product.price;
+    totalAmout += product.quantity * product.price;
   }
 
   return (
@@ -29,7 +29,7 @@ const CartModal = (props) => {
           </Row>
         </Modal.Body>
         {props.products.map((item) => (
-          <Modal.Body key={item.title}>
+          <Modal.Body key={item._id}>
             <Row>
               <Col>
                 <Image src={item.imageUrl} alt="" style={{ height: "50px" }} />
@@ -45,15 +45,13 @@ const CartModal = (props) => {
                   height: "40px",
                 }}
               >
-                <input
-                  type="number"
-                  value={item.quantity}
-                  style={{ width: "31px" }}
-                />
+                <span style={{ width: "31px", padding: "5px" }}>
+                  x{item.quantity}
+                </span>
                 <Button
                   variant="danger"
                   onClick={() => {
-                    props.onRemove(item.title);
+                    props.onRemove(item._id);
                   }}
                 >
                   REMOVE
