@@ -64,6 +64,7 @@ const CartModal = (props) => {
           Total ${totalAmout}
         </span>
         <Modal.Footer>
+          {totalAmout > 1000 && <Button variant="warning">Premium</Button>}
           <Button variant="secondary" onClick={props.onHandleClose}>
             Save Changes
           </Button>

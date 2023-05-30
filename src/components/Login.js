@@ -1,9 +1,8 @@
-import React, { useContext, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Card from "./UI/Card";
 import { Button, Form, NavLink } from "react-bootstrap";
-import AuthContext from "./store/auth-context";
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { authActions } from "./store/index";
 
 const Login = (props) => {
@@ -13,8 +12,6 @@ const Login = (props) => {
   const enteredPasswordRef = useRef();
 
   const dispatch = useDispatch();
-
-  const authCtx = useContext(AuthContext);
 
   const history = useHistory();
 
@@ -65,7 +62,6 @@ const Login = (props) => {
         }
       })
       .then((data) => {
-        authCtx.login(data.idToken);
         dispatch(authActions.login(data.idToken));
         history.replace("/store");
       })

@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import NavBar from "./components/NavBar";
 import AvailableProducts from "./components/AvailableProducts";
 import CartModal from "./components/CartModal";
@@ -7,8 +7,8 @@ import Home from "./components/Home";
 import ContactUs from "./components/ContactUs";
 import { Switch, Route } from "react-router-dom";
 import Login from "./components/Login";
-import AuthContext from "./components/store/auth-context";
 import axios from "axios";
+import { useSelector } from "react-redux";
 
 const App = () => {
   const [productData, setProductData] = useState([]);
@@ -17,7 +17,7 @@ const App = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const authCtx = useContext(AuthContext);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
   const getEmail = (email) => {
     let updatedEmail = "";
@@ -103,7 +103,7 @@ const App = () => {
         <Route path="/login">
           <Login email={getEmail} />
         </Route>
-        {authCtx.isLoggedIn && (
+        {isLoggedIn && (
           <Route path="/store">
             <AvailableProducts onAddToCart={addToCartHandler} />
           </Route>
