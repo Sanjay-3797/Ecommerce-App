@@ -3,12 +3,16 @@ import Card from "./UI/Card";
 import { Button, Form, NavLink } from "react-bootstrap";
 import AuthContext from "./store/auth-context";
 import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "./store/index";
 
 const Login = (props) => {
   const [isLogin, setLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const enteredEmailRef = useRef();
   const enteredPasswordRef = useRef();
+
+  const dispatch = useDispatch();
 
   const authCtx = useContext(AuthContext);
 
@@ -62,6 +66,7 @@ const Login = (props) => {
       })
       .then((data) => {
         authCtx.login(data.idToken);
+        dispatch(authActions.login(data.idToken));
         history.replace("/store");
       })
       .catch((err) => {

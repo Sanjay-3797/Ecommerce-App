@@ -33,6 +33,7 @@ const productsArray = [
 ];
 
 const AvailableProducts = (props) => {
+
   const product = productsArray.map((item) => (
     <div
       className="mt-5"

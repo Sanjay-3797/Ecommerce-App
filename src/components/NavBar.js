@@ -1,15 +1,16 @@
-import React, { useContext } from "react";
 import { Button, Container, Nav, Navbar } from "react-bootstrap";
-import AuthContext from "./store/auth-context";
 import { useHistory } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { authActions } from "./store";
 
 const NavBar = (props) => {
-  const authCtx = useContext(AuthContext);
+  const isLoggedIn = useSelector((state) => state.isLoggedIn);
+  const dispatch = useDispatch();
 
   const history = useHistory();
 
   const logoutHandler = () => {
-    authCtx.logout();
+    dispatch(authActions.logout());
     history.replace("/login");
   };
 
@@ -24,15 +25,15 @@ const NavBar = (props) => {
           <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link href="/">HOME</Nav.Link>
-              {authCtx.isLoggedIn && <Nav.Link href="/store">STORE</Nav.Link>}
+              {isLoggedIn && <Nav.Link href="/store">STORE</Nav.Link>}
 
               <Nav.Link href="/about">ABOUT</Nav.Link>
-              {!authCtx.isLoggedIn && <Nav.Link href="/login">LOGIN</Nav.Link>}
-              {authCtx.isLoggedIn && (
+              {!isLoggedIn && <Nav.Link href="/login">LOGIN</Nav.Link>}
+              {isLoggedIn && (
                 <Nav.Link onClick={logoutHandler}>LOGOUT</Nav.Link>
               )}
               <Nav.Link href="/contactUs">Contact Us</Nav.Link>
-              {authCtx.isLoggedIn && (
+              {isLoggedIn && (
                 <Button variant="secondary" onClick={props.onShowCart}>
                   CART <sup>({props.products.length})</sup>
                 </Button>

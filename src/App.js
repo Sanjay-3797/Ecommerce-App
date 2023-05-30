@@ -34,7 +34,7 @@ const App = () => {
   const fetchCartItemHandler = useCallback(async () => {
     try {
       const response = await axios.get(
-        `https://crudcrud.com/api/c586986e4e9d4071bb1a9e4fa59612b3/${localStorage.getItem(
+        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
           "email"
         )}`
       );
@@ -43,6 +43,7 @@ const App = () => {
       console.log(error);
     }
   }, []);
+
   useEffect(() => {
     fetchCartItemHandler();
   }, [fetchCartItemHandler]);
@@ -50,7 +51,7 @@ const App = () => {
   const addToCartHandler = async (productData) => {
     try {
       const response = await axios.post(
-        `https://crudcrud.com/api/c586986e4e9d4071bb1a9e4fa59612b3/${localStorage.getItem(
+        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
           "email"
         )}`,
         productData
@@ -70,7 +71,7 @@ const App = () => {
   const removeFromCartHandler = async (id) => {
     try {
       const response = await axios.delete(
-        `https://crudcrud.com/api/c586986e4e9d4071bb1a9e4fa59612b3/${localStorage.getItem(
+        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
           "email"
         )}/${id}`
       );
