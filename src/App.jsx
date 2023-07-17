@@ -19,6 +19,8 @@ const App = () => {
 
   const isLoggedIn = useSelector((state) => state.isLoggedIn);
 
+  const url = `https://crudcrud.com/api/95fa79934b6e46fab8df1f437234b7d9/${localStorage.getItem("email")}`;
+
   const getEmail = (email) => {
     let updatedEmail = "";
     for (const letter of email) {
@@ -33,16 +35,12 @@ const App = () => {
 
   const fetchCartItemHandler = useCallback(async () => {
     try {
-      const response = await axios.get(
-        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
-          "email"
-        )}`
-      );
+      const response = await axios.get(url);
       setProductData(response.data);
     } catch (error) {
       console.log(error);
     }
-  }, []);
+  }, [url]);
 
   useEffect(() => {
     fetchCartItemHandler();
@@ -50,12 +48,7 @@ const App = () => {
 
   const addToCartHandler = async (productData) => {
     try {
-      const response = await axios.post(
-        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
-          "email"
-        )}`,
-        productData
-      );
+      const response = await axios.post(url, productData);
       setProductData((prevData) => {
         if (prevData.includes(productData)) {
           alert("This item is already added to Cart");
@@ -70,22 +63,14 @@ const App = () => {
 
   const removeFromCartHandler = async (id) => {
     try {
-      const response = await axios.delete(
-        `https://crudcrud.com/api/9846fd0645864bd59b50825ea6392e8c/${localStorage.getItem(
-          "email"
-        )}/${id}`
-      );
-      // setProductData((prevData) => {
-      //   const updatedCartData = prevData.filter((item) => item._id !== id);
-      //   return updatedCartData;
-      // });
+      setProductData((prevData) => {
+        const updatedCartData = prevData.filter((item) => item._id !== id);
+        return updatedCartData;
+      });
+      const response = await axios.delete(`${url}/${id}`);
     } catch (error) {
       console.log(error);
     }
-    setProductData((prevData) => {
-      const updatedCartData = prevData.filter((item) => item._id !== id);
-      return updatedCartData;
-    });
   };
 
   return (

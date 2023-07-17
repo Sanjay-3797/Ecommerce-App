@@ -5,6 +5,10 @@ const initialState = {
   isLoggedIn: !!localStorage.getItem("token"),
   login: (token) => {},
   logout: () => {},
+  premium: false,
+  activatePremium: () => {},
+  theme: false,
+  setTheme: () => {},
 };
 
 const authSlice = createSlice({
@@ -20,6 +24,12 @@ const authSlice = createSlice({
       state.token = null;
       localStorage.removeItem("token");
       state.isLoggedIn = false;
+    },
+    activatePremium(state) {
+      state.premium = !state.premium;
+    },
+    setTheme(state) {
+      state.theme = !state.theme;
     },
   },
 });

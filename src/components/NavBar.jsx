@@ -14,6 +14,13 @@ const NavBar = (props) => {
     history.replace("/login");
   };
 
+  const premiumState = useSelector((state) => state.premium);
+  const theme = useSelector((state) => state.theme);
+
+  const themeHandler = () => {
+    dispatch(authActions.setTheme());
+  };
+
   return (
     <div>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -33,6 +40,11 @@ const NavBar = (props) => {
                 <Nav.Link onClick={logoutHandler}>LOGOUT</Nav.Link>
               )}
               <Nav.Link href="/contactUs">Contact Us</Nav.Link>
+              {premiumState && (
+                <Nav.Link onClick={themeHandler}>
+                  {theme ? "LIGHT THEME" : "DARK THEME"}
+                </Nav.Link>
+              )}
               {isLoggedIn && (
                 <Button variant="secondary" onClick={props.onShowCart}>
                   CART <sup>({props.products.length})</sup>

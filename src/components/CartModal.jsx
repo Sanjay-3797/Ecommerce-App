@@ -2,12 +2,26 @@ import React, { Fragment } from "react";
 import { Col, Image, Row } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useSelector, useDispatch } from "react-redux";
+import { authActions } from "./store";
 
 const CartModal = (props) => {
+  const premiumState = useSelector((state) => state.premium);
+  const dispatch = useDispatch();
+
+  const premiumHandler = () => {
+    dispatch(authActions.activatePremium());
+  };
+
   let totalAmout = 0;
   for (const product of props.products) {
     totalAmout += product.quantity * product.price;
   }
+
+  const premium = totalAmout > 10000;
+
+  const downloadBlob = new Blob(props.products, { type: "text/plain" });
+  const downloadLink = URL.createObjectURL(downloadBlob);
 
   return (
     <Fragment>
@@ -18,7 +32,12 @@ const CartModal = (props) => {
       >
         <Modal.Header closeButton>
           <Modal.Title>
-            Cart <sup>{props.products.length}</sup>
+            Cart <sup>{props.products.length}</sup>{" "}
+            {premiumState && (
+              <Button href={downloadLink} download="Invoice.txt">
+                Invoice
+              </Button>
+            )}
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -60,11 +79,17 @@ const CartModal = (props) => {
             </Row>
           </Modal.Body>
         ))}
-        <span style={{ display: "flex", justifyContent: "end" }}>
+        <span
+          style={{ display: "flex", justifyContent: "end", padding: "25px" }}
+        >
           Total ${totalAmout}
         </span>
         <Modal.Footer>
-          {totalAmout > 1000 && <Button variant="warning">Premium</Button>}
+          {premium && (
+            <Button variant="warning" onClick={premiumHandler}>
+              Activate Premium
+            </Button>
+          )}
           <Button variant="secondary" onClick={props.onHandleClose}>
             Save Changes
           </Button>
